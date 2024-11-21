@@ -31,6 +31,12 @@ public class Task {
     private Long id;
 
     /**
+     * Наименование
+     */
+    @Column(name = "name")
+    private String name;
+
+    /**
      * Статус
      */
     @Column(name = "state")
@@ -42,6 +48,7 @@ public class Task {
      */
     @Column(name = "execution_time")
     private long executionTime;
+
     /**
      * Дата и время создания
      */

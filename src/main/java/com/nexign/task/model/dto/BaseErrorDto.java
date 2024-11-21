@@ -1,10 +1,13 @@
 package com.nexign.task.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Базовая модель сообщения об ошибке
@@ -12,6 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
+@JsonInclude(NON_NULL)
 public class BaseErrorDto {
 
     /**
@@ -23,11 +27,6 @@ public class BaseErrorDto {
      * Описание HTTP статуса
      */
     private String error;
-
-    /**
-     * Заголовок ошибки
-     */
-    private String header;
 
     /**
      * Сообщение ошибки
@@ -48,11 +47,6 @@ public class BaseErrorDto {
      * Stacktrace
      */
     private String trace;
-
-    /**
-     * Вид обработки сообщения на ui
-     */
-    private String type;
 
     /**
      * Время когда произошла ошибка

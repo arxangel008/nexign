@@ -8,9 +8,9 @@ server:
 spring:
   datasource: # соединение с БД
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:15453/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:15433/nexing
+    username: nexing
+    password: nexing
     hikari: # конфигурация пула соединения с БД
       initialization-fail-fast: true
       auto-commit: false

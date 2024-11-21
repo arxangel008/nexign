@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+
+  postgres:
+    container_name: db-postgres
+    image: postgres:15
+    ports:
+      - "15433:5432"
+    volumes:
+      - "./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro"
+#      - "./config/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql:ro"
+    environment:
+      - TZ=Europe/Moscow
+      - POSTGRES_USER=nexing
+      - POSTGRES_PASSWORD=nexing
+      - POSTGRES_DB=nexing

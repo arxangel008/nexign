@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20241121-01-initial.xml" author="butuzovvu">
+        <createTable tableName="task" remarks="Задача">
+            <column name="id" type="bigint" autoIncrement="true" remarks="Идентификатор">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="text" remarks="Наименование">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="text" remarks="Статус">
+                <constraints nullable="false"/>
+            </column>
+            <column name="execution_time" type="bigint" remarks="Время выполнения">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_date" type="timestamp" remarks="Дата и время создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="timestamp" remarks="Время окончания"/>
+            <column name="error_description" type="text" remarks="Описание ошибки"/>
+        </createTable>
+
+        <createIndex tableName="task" indexName="task_state_idx">
+            <column name="state"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

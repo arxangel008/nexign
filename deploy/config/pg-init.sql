@@ -1,5 +1,0 @@
-CREATE DATABASE nexing
-    WITH
-    OWNER = nexing
-    ENCODING = 'UTF8'
-    CONNECTION LIMIT = -1;

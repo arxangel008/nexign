@@ -1,0 +1,53 @@
+# Общая конфигурация приложения
+
+# Свойства сервера
+server:
+  port: 8080
+
+# Конфигурация spring
+spring:
+  datasource: # соединение с БД
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:15453/postgres
+    username: postgres
+    password: postgres
+    hikari: # конфигурация пула соединения с БД
+      initialization-fail-fast: true
+      auto-commit: false
+      maximum-pool-size: 6
+      idle-timeout: 60000
+      connection-timeout: 60000
+      connection-test-query: SELECT 1
+      pool-name: springHikariCP
+      data-source-properties:
+        stringtype: unspecified
+  jpa: # настройка JPA
+    open-in-view: false
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+  jackson: # настройка сериализациии и десериализации jackson
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+    serialization.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS: false
+    serialization.WRITE_ENUMS_USING_TO_STRING: true
+    deserialization.READ_DATE_TIMESTAMPS_AS_NANOSECONDS: false
+  liquibase: # конфигурация liquibase
+    change-log: classpath:liquibase/changelog.xml
+    enabled: true
+
+# Настройка уровня логирования
+logging:
+  level:
+    liquibase: INFO
+
+# Настройка actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

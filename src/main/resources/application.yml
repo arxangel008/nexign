@@ -37,6 +37,12 @@ spring:
     change-log: classpath:liquibase/changelog.xml
     enabled: true
 
+# Конфигурация обработки задач
+task:
+  processing-cron: "0 */1 * * * *"
+  max-thread-to-processing: 5 # максимальное значение воркеров
+  limit: 10 # ограничение на выборку из бд данных
+
 # Настройка Kafka
 kafka:
   common:

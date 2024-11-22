@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20241122-01-add-processing-date" author="butuzovvu">
+        <addColumn tableName="task">
+            <column name="processing_date" type="timestamp" remarks="Дата начала обработки"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

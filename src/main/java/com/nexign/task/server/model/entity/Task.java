@@ -56,6 +56,12 @@ public class Task {
     private LocalDateTime createDate;
 
     /**
+     * Дата и время начала обработки
+     */
+    @Column(name = "processing_date")
+    private LocalDateTime processingDate;
+
+    /**
      * Время окончания
      */
     @Column(name = "end_date")

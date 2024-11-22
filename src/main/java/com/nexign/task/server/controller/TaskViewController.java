@@ -1,7 +1,7 @@
-package com.nexign.task.controller;
+package com.nexign.task.server.controller;
 
-import com.nexign.task.model.dto.TaskCreateResponseDto;
-import com.nexign.task.service.TaskService;
+import com.nexign.task.common.model.TaskCreateResponseDto;
+import com.nexign.task.server.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

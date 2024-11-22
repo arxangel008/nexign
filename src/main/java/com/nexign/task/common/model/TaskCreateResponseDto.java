@@ -1,4 +1,4 @@
-package com.nexign.task.model.dto;
+package com.nexign.task.common.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -24,4 +24,7 @@ public class TaskCreateResponseDto {
 
     @Schema(description = "Статус задания")
     private String state;
+
+    @Schema(description = "Сообщение при ошибке")
+    private String errorMessage;
 }

@@ -1,4 +1,4 @@
-package com.nexign.task.model.exception;
+package com.nexign.task.common.exception;
 
 import org.springframework.core.NestedRuntimeException;
 

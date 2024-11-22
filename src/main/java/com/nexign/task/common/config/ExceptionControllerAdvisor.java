@@ -1,8 +1,8 @@
-package com.nexign.task.controller;
+package com.nexign.task.common.config;
 
-import com.nexign.task.model.dto.BaseErrorDto;
-import com.nexign.task.model.exception.NotFoundException;
-import com.nexign.task.service.WebExceptionHandler;
+import com.nexign.task.common.exception.NotFoundException;
+import com.nexign.task.common.model.BaseErrorDto;
+import com.nexign.task.common.service.WebExceptionHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.nexign.task.model.dto;
+package com.nexign.task.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

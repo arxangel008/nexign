@@ -1,8 +1,8 @@
-package com.nexign.task.controller;
+package com.nexign.task.client.controller;
 
-import com.nexign.task.integration.kafka.TaskKafkaProducer;
-import com.nexign.task.model.dto.TaskCreateRequestDto;
-import com.nexign.task.model.dto.TaskCreateResponseDto;
+import com.nexign.task.client.service.TaskKafkaProducer;
+import com.nexign.task.common.model.TaskCreateRequestDto;
+import com.nexign.task.common.model.TaskCreateResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

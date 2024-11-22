@@ -1,12 +1,10 @@
-package com.nexign.task.config;
+package com.nexign.task.server.config;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.module.jsr310.Jsr310Module;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 import static org.modelmapper.convention.MatchingStrategies.STRICT;
 

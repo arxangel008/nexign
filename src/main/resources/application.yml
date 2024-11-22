@@ -39,6 +39,8 @@ spring:
 
 # Настройка Kafka
 kafka:
+  topic:
+    callback: task_result
   bootstrap-servers: localhost:9092
   properties:
     ack: all # Гарантирует подтверждение от всех реплик

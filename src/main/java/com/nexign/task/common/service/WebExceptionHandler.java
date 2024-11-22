@@ -1,6 +1,6 @@
-package com.nexign.task.service;
+package com.nexign.task.common.service;
 
-import com.nexign.task.model.dto.BaseErrorDto;
+import com.nexign.task.common.model.BaseErrorDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

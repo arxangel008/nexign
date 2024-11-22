@@ -1,8 +1,8 @@
-package com.nexign.task.service;
+package com.nexign.task.server.service;
 
-import com.nexign.task.model.entity.Task;
-import com.nexign.task.model.exception.NotFoundException;
-import com.nexign.task.repository.TaskRepository;
+import com.nexign.task.common.exception.NotFoundException;
+import com.nexign.task.server.model.entity.Task;
+import com.nexign.task.server.repository.TaskRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-import static com.nexign.task.model.enums.TaskState.CREATED;
+import static com.nexign.task.server.model.enums.TaskState.CREATED;
 import static java.lang.String.format;
 
 /**

@@ -1,4 +1,4 @@
-package com.nexign.task.model.enums;
+package com.nexign.task.server.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.nexign.task.model.entity;
+package com.nexign.task.server.model.entity;
 
-import com.nexign.task.model.enums.TaskState;
+import com.nexign.task.server.model.enums.TaskState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

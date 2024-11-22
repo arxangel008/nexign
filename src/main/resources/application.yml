@@ -37,6 +37,18 @@ spring:
     change-log: classpath:liquibase/changelog.xml
     enabled: true
 
+# Настройка Kafka
+kafka:
+  bootstrap-servers: localhost:9092
+  properties:
+    ack: all # Гарантирует подтверждение от всех реплик
+    retries: 3 # Количество попыток при сбоях
+  consumer: # определение группы
+    group-id: task-group
+    enable-auto-commit: true
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
 # Настройка уровня логирования
 logging:
   level:

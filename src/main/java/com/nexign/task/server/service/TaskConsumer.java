@@ -18,16 +18,23 @@ public class TaskConsumer {
     private final TaskService taskService;
     private final ModelMapper modelMapper;
 
-    @KafkaListener(topics = "tasks", groupId = "task-group", autoStartup = "true", containerFactory = "requestListenerContainerFactory")
+    /**
+     * Получение сообщения на создание задания
+     *
+     * @param taskCreateRequestDto информация о задании
+     * @return созданное задание
+     */
+    @KafkaListener(topics = "${kafka.common.topic}", groupId = "${kafka.common.group-id}",
+            autoStartup = "true", containerFactory = "requestListenerContainerFactory")
     @SendTo
-    public TaskCreateResponseDto consumeTask(TaskCreateRequestDto record) {
+    public TaskCreateResponseDto consumeTask(TaskCreateRequestDto taskCreateRequestDto) {
         try {
-            var task = taskService.create(modelMapper.map(record, Task.class));
+            var task = taskService.create(modelMapper.map(taskCreateRequestDto, Task.class));
             return modelMapper.map(task, TaskCreateResponseDto.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
 
-            var result = modelMapper.map(record, TaskCreateResponseDto.class);
+            var result = modelMapper.map(taskCreateRequestDto, TaskCreateResponseDto.class);
             result.setErrorMessage(e.getMessage());
 
             return result;

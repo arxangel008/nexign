@@ -39,17 +39,14 @@ spring:
 
 # Настройка Kafka
 kafka:
-  topic:
-    callback: task_result
-  bootstrap-servers: localhost:9092
-  properties:
-    ack: all # Гарантирует подтверждение от всех реплик
-    retries: 3 # Количество попыток при сбоях
-  consumer: # определение группы
+  common:
+    topic: tasks
     group-id: task-group
-    enable-auto-commit: true
-    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  reply:
+    topic: task-result
+    correlation-header-name: task-id
+    group-id: task-result-group
+  bootstrap-servers: localhost:9092
 
 # Настройка уровня логирования
 logging:

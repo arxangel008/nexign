@@ -3,41 +3,39 @@ package com.nexign.task.client.service;
 import com.nexign.task.common.model.TaskCreateRequestDto;
 import com.nexign.task.common.model.TaskCreateResponseDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.header.internals.RecordHeader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
-import org.springframework.kafka.requestreply.RequestReplyFuture;
-import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.stereotype.Service;
 
 import static java.time.Duration.ofSeconds;
 
-@Slf4j
+/**
+ * Сервис отправки сообщения в Кафку
+ */
 @Service
 @RequiredArgsConstructor
 public class TaskKafkaProducer {
 
     /**
-     * Url до Кафки
+     * Топик для отправки
      */
-    @Value("${kafka.topic.callback}")
-    private String topicCallback;
+    @Value("${kafka.common.topic}")
+    private String topic;
 
     private final ReplyingKafkaTemplate<String, TaskCreateRequestDto, TaskCreateResponseDto> replyingKafkaTemplate;
 
-    public TaskCreateResponseDto sendTaskWithReply(TaskCreateRequestDto taskDTO) {
-        // Создаем сообщение с заголовком correlationId
-        ProducerRecord<String, TaskCreateRequestDto> record = new ProducerRecord<>("tasks", taskDTO);
-        record.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC, topicCallback.getBytes()));
-
-
+    /**
+     * Отправка задания в кафку с ожиданием ответа
+     *
+     * @param taskCreateRequestDto информация о задании
+     * @return ответ по созданному заданию
+     */
+    public TaskCreateResponseDto sendTaskWithReply(TaskCreateRequestDto taskCreateRequestDto) {
         try {
-            // Отправляем сообщение и ждём ответа
-            RequestReplyFuture<String, TaskCreateRequestDto, TaskCreateResponseDto> future = replyingKafkaTemplate.sendAndReceive(record, ofSeconds(30));
-            ConsumerRecord<String, TaskCreateResponseDto> response = future.get(); // Ждём до 10 секунд
+            ProducerRecord<String, TaskCreateRequestDto> record = new ProducerRecord<>(topic, taskCreateRequestDto);
+            var future = replyingKafkaTemplate.sendAndReceive(record, ofSeconds(30));
+            var response = future.get();
 
             if (response.value() == null) {
                 throw new RuntimeException("Ошибка при создании задания");
@@ -45,7 +43,7 @@ public class TaskKafkaProducer {
 
             return response.value();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to send task with reply", e);
+            throw new RuntimeException("Возникла при ошибке отправке сообщения в Кафку", e);
         }
     }
 }

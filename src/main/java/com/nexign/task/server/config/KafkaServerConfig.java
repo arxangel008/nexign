@@ -20,6 +20,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Конфигурация сервера Кафки
+ */
 @Configuration
 @RequiredArgsConstructor
 public class KafkaServerConfig {
@@ -29,6 +32,12 @@ public class KafkaServerConfig {
      */
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
+
+    /**
+     * Наименование заголовка корреляции
+     */
+    @Value("${kafka.reply.correlation-header-name}")
+    private String correlationHeaderName;
 
     @Bean
     public Map<String, Object> consumerServerConfigs() {
@@ -60,7 +69,7 @@ public class KafkaServerConfig {
         ConcurrentKafkaListenerContainerFactory<String, TaskCreateRequestDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(requestConsumerFactory());
         factory.setReplyTemplate(replyTemplate());
-        factory.setCorrelationHeaderName("task_id");
+        factory.setCorrelationHeaderName(correlationHeaderName);
         return factory;
     }
 

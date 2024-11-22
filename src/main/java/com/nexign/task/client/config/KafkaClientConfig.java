@@ -23,6 +23,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Конфигурация клиента кафки
+ */
 @Configuration
 @RequiredArgsConstructor
 public class KafkaClientConfig {
@@ -34,10 +37,22 @@ public class KafkaClientConfig {
     private String bootstrapServers;
 
     /**
-     * Url до Кафки
+     * Топик ответа
      */
-    @Value("${kafka.topic.callback}")
-    private String topicCallback;
+    @Value("${kafka.reply.topic}")
+    private String replyTopic;
+
+    /**
+     * Наименование заголовка корреляции
+     */
+    @Value("${kafka.reply.correlation-header-name}")
+    private String correlationHeaderName;
+
+    /**
+     * Наименование группы ответа
+     */
+    @Value("${kafka.reply.group-id}")
+    private String groupId;
 
     @Bean
     public Map<String, Object> consumerClientConfigs() {
@@ -70,17 +85,15 @@ public class KafkaClientConfig {
 
     @Bean
     public KafkaMessageListenerContainer<String, TaskCreateResponseDto> replyListenerContainer() {
-        ContainerProperties containerProperties = new ContainerProperties(topicCallback);
-        containerProperties.setGroupId("reply-group");
+        ContainerProperties containerProperties = new ContainerProperties(replyTopic);
+        containerProperties.setGroupId(groupId);
         return new KafkaMessageListenerContainer<>(replyConsumerFactory(), containerProperties);
     }
 
     @Bean
-    public ReplyingKafkaTemplate<String, TaskCreateRequestDto, TaskCreateResponseDto> replyKafkaTemplate(
-            ProducerFactory<String, TaskCreateRequestDto> pf,
-            KafkaMessageListenerContainer<String, TaskCreateResponseDto> lc) {
+    public ReplyingKafkaTemplate<String, TaskCreateRequestDto, TaskCreateResponseDto> replyKafkaTemplate(ProducerFactory<String, TaskCreateRequestDto> pf, KafkaMessageListenerContainer<String, TaskCreateResponseDto> lc) {
         var replyingKafkaTemplate = new ReplyingKafkaTemplate<>(pf, lc);
-        replyingKafkaTemplate.setCorrelationHeaderName("task_id");
+        replyingKafkaTemplate.setCorrelationHeaderName(correlationHeaderName);
 
         return replyingKafkaTemplate;
     }

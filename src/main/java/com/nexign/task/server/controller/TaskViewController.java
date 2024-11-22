@@ -1,6 +1,6 @@
 package com.nexign.task.server.controller;
 
-import com.nexign.task.common.model.TaskCreateResponseDto;
+import com.nexign.task.server.model.dto.TaskViewResponseDto;
 import com.nexign.task.server.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,8 +28,8 @@ public class TaskViewController {
 
     @Operation(description = "Получение задания")
     @GetMapping("/{id}")
-    public ResponseEntity<TaskCreateResponseDto> getTask(@Parameter(description = "Идентификатор задания") @PathVariable("id") Long id) {
+    public ResponseEntity<TaskViewResponseDto> getTask(@Parameter(description = "Идентификатор задания") @PathVariable("id") Long id) {
         var task = taskService.getById(id);
-        return ok(modelMapper.map(task, TaskCreateResponseDto.class));
+        return ok(modelMapper.map(task, TaskViewResponseDto.class));
     }
 }

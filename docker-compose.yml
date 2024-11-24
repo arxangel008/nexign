@@ -7,7 +7,7 @@ services:
     ports:
       - "15433:5432"
     volumes:
-      - "./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro"
+      - "./deploy/config/postgresql.conf:/etc/postgresql/postgresql.conf:ro"
     environment:
       - TZ=Europe/Moscow
       - POSTGRES_USER=nexing
@@ -15,18 +15,34 @@ services:
       - POSTGRES_DB=nexing
 
   kafka:
+    container_name: kafka
     image: bitnami/kafka:latest
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
     ports:
       - "9092:9092"
+    depends_on:
+      - zookeeper
 
   zookeeper:
+    container_name: zookeeper
     image: bitnami/zookeeper:latest
     ports:
       - "2181:2181"
     environment:
       ALLOW_ANONYMOUS_LOGIN: yes
+
+  nexign:
+    container_name: nexign-task-test
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+      - kafka

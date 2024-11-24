@@ -28,7 +28,7 @@ import static org.springframework.http.ResponseEntity.status;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WebExceptionHandler {
+public class WebExceptionService {
 
     /**
      * Резервный предохранитель если stacktrace окажется слишком большим

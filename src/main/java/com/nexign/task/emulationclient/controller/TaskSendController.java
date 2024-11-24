@@ -1,8 +1,8 @@
-package com.nexign.task.client.controller;
+package com.nexign.task.emulationclient.controller;
 
-import com.nexign.task.client.service.TaskKafkaProducer;
 import com.nexign.task.common.model.TaskCreateRequestDto;
 import com.nexign.task.common.model.TaskCreateResponseDto;
+import com.nexign.task.emulationclient.service.TaskKafkaProducer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,8 +21,8 @@ import static org.springframework.http.ResponseEntity.status;
 
 @Validated
 @RestController
-@RequestMapping(value = "/api/v1/task/send")
 @RequiredArgsConstructor
+@RequestMapping(value = "/api/v1/task/send")
 @Tag(name = "TaskSend", description = "Контроллер для отправки задания")
 public class TaskSendController {
 

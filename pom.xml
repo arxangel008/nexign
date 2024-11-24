@@ -37,6 +37,7 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.11.1</maven-javadoc-plugin.version>
+        <spring-boot-dependencies.version>3.4.0</spring-boot-dependencies.version>
     </properties>
 
     <dependencies>
@@ -157,6 +158,24 @@
                         <exclude>**/e2e/**/*.java</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+            <!-- Плагин для сборки SpringBoot приложений при помощи Maven
+             дополнительно конфигурируем для того чтобы jar файл был исполняемым-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <configuration>
+                    <mainClass>com.nexign.task.TaskApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Прикрепление source code -->

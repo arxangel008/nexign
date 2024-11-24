@@ -1,4 +1,4 @@
-package com.nexign.task.client.service;
+package com.nexign.task.emulationclient.service;
 
 import com.nexign.task.common.model.TaskCreateRequestDto;
 import com.nexign.task.common.model.TaskCreateResponseDto;
@@ -33,7 +33,7 @@ public class TaskKafkaProducer {
      */
     public TaskCreateResponseDto sendTaskWithReply(TaskCreateRequestDto taskCreateRequestDto) {
         try {
-            ProducerRecord<String, TaskCreateRequestDto> record = new ProducerRecord<>(topic, taskCreateRequestDto);
+            var record = new ProducerRecord<String, TaskCreateRequestDto>(topic, taskCreateRequestDto);
             var future = replyingKafkaTemplate.sendAndReceive(record, ofSeconds(30));
             var response = future.get();
 
@@ -43,7 +43,7 @@ public class TaskKafkaProducer {
 
             return response.value();
         } catch (Exception e) {
-            throw new RuntimeException("Возникла при ошибке отправке сообщения в Кафку", e);
+            throw new RuntimeException("Возникла ошибке при отправке сообщения в Кафку", e);
         }
     }
 }

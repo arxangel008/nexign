@@ -2,7 +2,7 @@ package com.nexign.task.common.config;
 
 import com.nexign.task.common.exception.NotFoundException;
 import com.nexign.task.common.model.BaseErrorDto;
-import com.nexign.task.common.service.WebExceptionHandler;
+import com.nexign.task.common.service.WebExceptionService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class ExceptionControllerAdvisor {
     /**
      * Обработчик ошибок
      */
-    private final WebExceptionHandler handler;
+    private final WebExceptionService handler;
 
     /**
      * Любые не обработанные ошибки

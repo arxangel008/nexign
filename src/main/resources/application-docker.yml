@@ -1,0 +1,9 @@
+# Общая конфигурация приложения
+# Конфигурация spring
+spring:
+  datasource: # соединение с БД
+    url: jdbc:postgresql://db-postgres:5432/nexing
+
+# Настройка Kafka
+kafka:
+  bootstrap-servers: kafka:9092

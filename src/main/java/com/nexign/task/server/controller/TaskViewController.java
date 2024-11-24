@@ -18,8 +18,8 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/task")
 @RequiredArgsConstructor
+@RequestMapping(value = "/api/v1/task")
 @Tag(name = "TaskSend", description = "Контроллер для работы с заданием")
 public class TaskViewController {
 

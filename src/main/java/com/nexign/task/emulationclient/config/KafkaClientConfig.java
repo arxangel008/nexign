@@ -1,4 +1,4 @@
-package com.nexign.task.client.config;
+package com.nexign.task.emulationclient.config;
 
 import com.nexign.task.common.model.TaskCreateRequestDto;
 import com.nexign.task.common.model.TaskCreateResponseDto;

@@ -39,8 +39,8 @@ public class Task {
     /**
      * Статус
      */
-    @Column(name = "state")
     @Enumerated(STRING)
+    @Column(name = "state")
     private TaskState state;
 
     /**

@@ -30,7 +30,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             WHERE id IN (SELECT id 
                          FROM task 
                          WHERE state = 'CREATED'
-                         ORDER BY id DESC
+                         ORDER BY id
                          LIMIT :limit
                          FOR UPDATE SKIP LOCKED
                         )

@@ -24,7 +24,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/task")
-@Tag(name = "TaskSend", description = "Контроллер для работы с заданием")
+@Tag(name = "TaskView", description = "Контроллер для работы с заданием")
 public class TaskViewController {
 
     private final TaskService taskService;

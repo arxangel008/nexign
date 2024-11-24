@@ -43,7 +43,7 @@ public class TaskKafkaProducer {
 
             return response.value();
         } catch (Exception e) {
-            throw new RuntimeException("Возникла ошибке при отправке сообщения в Кафку", e);
+            throw new RuntimeException("Возникла ошибка при отправке сообщения в Кафку", e);
         }
     }
 }

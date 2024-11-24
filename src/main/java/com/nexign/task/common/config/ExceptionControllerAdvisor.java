@@ -26,14 +26,14 @@ public class ExceptionControllerAdvisor {
     /**
      * Обработчик ошибок
      */
-    private final WebExceptionService handler;
+    private final WebExceptionService webExceptionService;
 
     /**
      * Любые не обработанные ошибки
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseErrorDto> handleException(Exception exception, HttpServletRequest request) {
-        return handler.makeResponse(INTERNAL_SERVER_ERROR, BaseErrorDto::new, exception, request);
+        return webExceptionService.makeResponse(INTERNAL_SERVER_ERROR, BaseErrorDto::new, exception, request);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ExceptionControllerAdvisor {
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<BaseErrorDto> handleNotFoundException(NotFoundException exception, HttpServletRequest request) {
-        return handler.makeResponse(NOT_FOUND, BaseErrorDto::new, exception, request);
+        return webExceptionService.makeResponse(NOT_FOUND, BaseErrorDto::new, exception, request);
     }
 
     /**
@@ -54,6 +54,6 @@ public class ExceptionControllerAdvisor {
                 .map(e -> "Поле: " + e.getField() + " " + e.getDefaultMessage())
                 .collect(joining("; "));
 
-        return handler.makeResponse(BAD_REQUEST, BaseErrorDto::new, exception, request, baseErrorDto -> baseErrorDto.setMessage(message));
+        return webExceptionService.makeResponse(BAD_REQUEST, BaseErrorDto::new, exception, request, baseErrorDto -> baseErrorDto.setMessage(message));
     }
 }

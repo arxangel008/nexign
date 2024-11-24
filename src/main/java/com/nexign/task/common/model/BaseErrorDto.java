@@ -1,6 +1,7 @@
 package com.nexign.task.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -9,47 +10,31 @@ import java.time.LocalDateTime;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
-/**
- * Базовая модель сообщения об ошибке
- */
 @Data
-@Accessors(chain = true)
 @NoArgsConstructor
 @JsonInclude(NON_NULL)
+@Accessors(chain = true)
+@Schema(description = "Базовая модель сообщения об ошибке")
 public class BaseErrorDto {
 
-    /**
-     * HTTP статус
-     */
+    @Schema(description = "HTTP статус")
     private int status;
 
-    /**
-     * Описание HTTP статуса
-     */
+    @Schema(description = "Описание HTTP статуса")
     private String error;
 
-    /**
-     * Сообщение ошибки
-     */
+    @Schema(description = "Сообщение ошибки")
     private String message;
 
-    /**
-     * Путь запроса
-     */
+    @Schema(description = "Путь запроса")
     private String path;
 
-    /**
-     * Класс исключения
-     */
+    @Schema(description = "Класс исключения")
     private String exception;
 
-    /**
-     * Stacktrace
-     */
+    @Schema(description = "Stacktrace")
     private String trace;
 
-    /**
-     * Время когда произошла ошибка
-     */
+    @Schema(description = "Время когда произошла ошибка")
     private LocalDateTime timestamp;
 }

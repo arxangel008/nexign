@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,18 +15,18 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Модель ответа по созданию задачи")
 public class TaskCreateResponseDto {
 
-    @Schema(description = "Идентификатор")
+    @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private Long id;
 
-    @Schema(description = "Наименование")
+    @Schema(description = "Наименование", requiredMode = REQUIRED)
     private String name;
 
-    @Schema(description = "Время выполнения")
+    @Schema(description = "Время выполнения", requiredMode = REQUIRED)
     private long executionTime;
 
-    @Schema(description = "Статус задания")
+    @Schema(description = "Статус задания", requiredMode = REQUIRED)
     private String state;
 
-    @Schema(description = "Сообщение при ошибке")
+    @Schema(description = "Сообщение при ошибке", requiredMode = REQUIRED)
     private String errorMessage;
 }
